@@ -20,6 +20,7 @@ The following images are built:
 - OpenResty
 - Lua
 - [Crowdsec Openresty Bouncer](https://github.com/crowdsecurity/cs-openresty-bouncer)
+- 增加nginx对https正向代理的支持
 
 **certbot**
 - Certbot
