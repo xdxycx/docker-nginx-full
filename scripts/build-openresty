@@ -59,7 +59,7 @@ cd /tmp/openresty
 	--with-stream_ssl_preread_module \
 	--add-module=/tmp/ngx_http_proxy_connect_module
 
-patch -d /tmp/openresty/bundle/nginx-1.21.4/ -p 1 < /tmp/ngx_http_proxy_connect_module/patch/proxy_connect_rewrite_102101.patch
+patch -d build/nginx-1.21.4/ -p 1 < /tmp/ngx_http_proxy_connect_module/patch/proxy_connect_rewrite_102101.patch
 
 make -j2
 
