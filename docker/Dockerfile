@@ -73,6 +73,7 @@ COPY ./scripts/install-lua /tmp/install-lua
 
 # Copy openresty build from first image
 COPY --from=nginxbuilder /tmp/openresty /tmp/openresty
+COPY --from=nginxbuilder /tmp/ngx_http_proxy_connect_module /tmp/ngx_http_proxy_connect_module
 COPY ./scripts/install-openresty /tmp/install-openresty
 
 # Copy crowdsec openresty bouncer install script
