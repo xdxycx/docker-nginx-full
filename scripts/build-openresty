@@ -9,9 +9,13 @@ RESET='\E[0m'
 echo -e "${BLUE}❯ ${CYAN}Building OpenResty ${YELLOW}${OPENRESTY_VERSION}...${RESET}"
 
 cd /tmp
+wget "https://github.com/chobits/ngx_http_proxy_connect_module/archive/refs/tags/v0.0.5.tar.gz"
+tar -xzf v0.0.5.tar.gz
+mv /tmp/ngx_http_proxy_connect_module-0.0.5 /tmp/ngx_http_proxy_connect_module
 wget "https://openresty.org/download/openresty-${OPENRESTY_VERSION}.tar.gz"
 tar -xzf openresty-${OPENRESTY_VERSION}.tar.gz
 mv /tmp/openresty-${OPENRESTY_VERSION} /tmp/openresty
+
 cd /tmp/openresty
 
 ./configure \
@@ -52,7 +56,10 @@ cd /tmp/openresty
 	--with-stream \
 	--with-stream_realip_module \
 	--with-stream_ssl_module \
-	--with-stream_ssl_preread_module
+	--with-stream_ssl_preread_module \
+	--add-module=/tmp/ngx_http_proxy_connect_module
+
+patch -d /tmp/openresty/bundle/nginx-1.21.4/ -p 1 < /tmp/ngx_http_proxy_connect_module/patch/proxy_connect_rewrite_102101.patch
 
 make -j2
 
